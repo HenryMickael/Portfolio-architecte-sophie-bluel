@@ -1,5 +1,3 @@
-// const { crossOriginEmbedderPolicy } = require("helmet");
-
 const generateProjet = async () => {
   let data = await fetch("http://localhost:5678/api/works");
   console.log(data);
@@ -24,9 +22,25 @@ const generateProjet = async () => {
 };
 
 generateProjet();
+// test filtre
+// genererObjetFiltree()=generateProjet() =>{
 
+// const boutonFiltrerObjet = document.querySelector("#objets");
+// boutonFiltrerObjet.addEventListener("click", function () {
+//   const objetsFiltrees = article.filter(obj.(article) {
+//     return article.name === "Objets";
+//   });
+//   console.log(objetsFiltrees);
+//   // });
+
+//   document.querySelector("#gallery").innerHTML = "";
+//   generateProjet(objetsFiltrees);
+// })
+// }
 /******************************************************************** */
-
+// **********************************************************************
+// ************************************************************************
+// ***********************************************************************
 // fetch("http://localhost:5678/api/works")
 //   .then((reponse) => {
 //     return reponse.json();
