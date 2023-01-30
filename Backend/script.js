@@ -1,134 +1,78 @@
-const generateProjet = async () => {
-  let data = await fetch("http://localhost:5678/api/works");
-  console.log(data);
+// let globalData;
+function fetchData() {
+  return fetch("http://localhost:5678/api/works")
+    .then((response) => response.json())
+    .then((data) => {
+      globalData = data;
+    });
+}
+// Gallery dynamique
+function genererGallery() {
+  fetchData().then(() => {
+    console.log(globalData);
+    for (let i = 0; i < globalData.length; i++) {
+      const article = globalData[i];
+      const sectionGallery = document.querySelector("#gallery");
+      const projetElement = document.createElement("figure");
+      const imageElement = document.createElement("img");
+      imageElement.srcset = article.imageUrl;
+      imageElement.setAttribute("alt", article.title);
+      const titleElement = document.createElement("p");
+      titleElement.innerText = article.title;
 
-  let response = await data.json();
-  console.log(response);
+      sectionGallery.appendChild(projetElement);
+      projetElement.appendChild(imageElement);
+      projetElement.appendChild(titleElement);
+    }
+  });
+}
+genererGallery();
+// // Filtre
+// Objet
+let Filtre = async () => {
+  const boutonFiltrerObjet = document.querySelector("#objets");
 
-  for (let i = 0; i < response.length; i++) {
-    const article = response[i];
-    const sectionGallery = document.querySelector("#gallery");
-    const projetElement = document.createElement("figure");
-    const imageElement = document.createElement("img");
-    imageElement.srcset = article.imageUrl;
-    // imageElement.setAttribute("alt", article.title);
-    const titleElement = document.createElement("p");
-    titleElement.innerText = article.title;
+  boutonFiltrerObjet.addEventListener("click", function () {
+    const projetFiltrees = globalData.filter(function (globalData) {
+      return globalData.categoryId === 1;
+    });
+    console.log(projetFiltrees);
+    document.querySelector("#gallery").innerHTML = "";
+    // genererGallery(projetFiltrees);
+  });
+  genererGallery(boutonFiltrerObjet);
+  // appartement
+  const boutonFiltrerAppartements = document.querySelector("#appartements");
 
-    sectionGallery.appendChild(projetElement);
-    projetElement.appendChild(imageElement);
-    projetElement.appendChild(titleElement);
-  }
+  boutonFiltrerAppartements.addEventListener("click", function () {
+    const projetFiltrees = globalData.filter(function (globalData) {
+      return globalData.categoryId === 2;
+    });
+    console.log(projetFiltrees);
+    document.querySelector("#gallery").innerHTML = "";
+  });
+  genererGallery(boutonFiltrerAppartements);
+  // Hotel et restaurant
+  const boutonFiltrerHotel = document.querySelector("#hotels-restaurant");
+
+  boutonFiltrerHotel.addEventListener("click", function () {
+    const projetFiltrees = globalData.filter(function (globalData) {
+      return globalData.categoryId === 3;
+    });
+    console.log(projetFiltrees);
+    document.querySelector("#gallery").innerHTML = "";
+  });
+  genererGallery(boutonFiltrerHotel);
+  // Tous
+  const boutonFiltrerTous = document.querySelector("#tous");
+
+  boutonFiltrerTous.addEventListener("click", function () {
+    const projetFiltrees = globalData.filter(function (globalData) {
+      return globalData.categoryId === 1, 2, 3;
+    });
+    console.log(projetFiltrees);
+    document.querySelector("#gallery").innerHTML = "";
+  });
+  genererGallery(boutonFiltrerTous);
 };
-
-generateProjet();
-// test filtre
-// genererObjetFiltree()=generateProjet() =>{
-
-// const boutonFiltrerObjet = document.querySelector("#objets");
-// boutonFiltrerObjet.addEventListener("click", function () {
-//   const objetsFiltrees = article.filter(obj.(article) {
-//     return article.name === "Objets";
-//   });
-//   console.log(objetsFiltrees);
-//   // });
-
-//   document.querySelector("#gallery").innerHTML = "";
-//   generateProjet(objetsFiltrees);
-// })
-// }
-/******************************************************************** */
-// **********************************************************************
-// ************************************************************************
-// ***********************************************************************
-// fetch("http://localhost:5678/api/works")
-//   .then((reponse) => {
-//     return reponse.json();
-//   })
-//   .then((data) => {
-//     console.log(data);
-//     for (let i = 0; i < data.length; i++) {
-//       const article = data[i];
-//       const sectionGallery = document.querySelector(".gallery");
-//       const projetElement = document.createElement("article");
-//       const imageElement = document.createElement(
-//         `img crossorigin="anonymous" src="article.imageUrl"`
-//       );
-//       //   imageElement.src = article.imageUrl;
-//       imageElement.setAttribute("alt", article.title);
-//       imageElement.setAttribute("title", article.title);
-//       const titleElement = document.createElement("p");
-//       titleElement.innerText = article.title;
-
-//       sectionGallery.appendChild(projetElement);
-//       projetElement.appendChild(imageElement);
-//       projetElement.appendChild(titleElement);
-//     }
-//   })
-//   .catch((error) => console.log("Erreur"));
-
-// //   ***********************************************************************************
-
-// fetch("http://localhost:5678/api/works")
-//   .then((reponse) => {
-//     return reponse.json();
-//   })
-//   .then((data) => {
-//     console.log(data);
-//     for (let i = 0; i < data.length; i++) {
-//       const article = data[i];
-//       const sectionGallery = document.querySelector(".gallery");
-//       const projetElement = document.createElement("article");
-//       const imageElement = document.createElement(
-//         `img crossorigin="anonymous"`
-//       );
-//       imageElement.src = article.works.imageUrl;
-//       imageElement.setAttribute("alt", article.title);
-//       imageElement.setAttribute("title", article.title);
-//       const titleElement = document.createElement("p");
-//       titleElement.innerText = article.title;
-
-//       sectionGallery.appendChild(projetElement);
-//       projetElement.appendChild(imageElement);
-//       projetElement.appendChild(titleElement);
-//     }
-//   })
-//   .catch((error) => console.log("Erreur"));
-
-// //   *******************************************************************************************************
-// http://localhost:5678/images/abajour-tahina1651286843956.png
-// fetch(`http://localhost:5678/api/works`)
-//   .then((reponse) => {
-//     return reponse.json();
-//   })
-//   .then((data) => {
-//     console.log(data);
-//     for (let i = 0; i < data.length; i++) {
-//       const article = data[i];
-//       const sectionGallery = document.querySelector("#gallery");
-//       const projetElement = document.createElement("figure");
-//       const imageElement = document.createElement("img");
-//       imageElement.src = article.imageUrl;
-//       //   imageElement.setAttribute("alt", article.title);
-//       //   imageElement.setAttribute("title", article.title);
-//       const titleElement = document.createElement("p");
-//       titleElement.innerText = article.title;
-//       sectionGallery.appendChild(projetElement);
-//       projetElement.appendChild(imageElement);
-//       projetElement.appendChild(titleElement);
-//     }
-//   })
-//   .catch((error) => console.log("Erreur"));
-
-// **********************************************************************
-// test filtre
-// const boutonFiltrerObjet = document.querySelector("#objets");
-// boutonFiltrerObjet.addEventListener("click", function () {
-//   const objetsFiltrees = article.filter(function (article) {
-//     return article.name === "Objets";
-//   });
-//   console.log(objetsFiltrees);
-// });
-
-// document.querySelector("#gallery").innerHTML = "";
-// generateProjet(objetsFiltrees);
+Filtre();
