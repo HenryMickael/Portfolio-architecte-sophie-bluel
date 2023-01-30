@@ -1,6 +1,7 @@
-fetch("http://localhost:5678/api/users/login", {
+fetch("http://localhost:5678/api/works", {
+  method: "GET",
   headers: {
-    Authorization: "Bearer " + bearerToken,
+    Authorization: "userId" + bearerToken,
   },
 })
   .then((response) => response.json())

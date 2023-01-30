@@ -48,8 +48,8 @@ form.addEventListener("submit", function (event) {
     })
     .then((data) => {
       const bearerToken = data.token;
-      localStorage.setItem("token", bearerToken);
-      window.location.href = "./index.html";
+      localStorage.setItem("userId", bearerToken);
+      window.location.href = "./indexAdmin.html";
     })
     .catch((error) => {
       alert("Authentication failed: " + error.message);

@@ -1,4 +1,3 @@
-// let globalData;
 function fetchData() {
   return fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
@@ -6,7 +5,8 @@ function fetchData() {
       globalData = data;
     });
 }
-// Gallery dynamique
+
+// Gallery dynamique****************************************************
 function genererGallery() {
   fetchData().then(() => {
     console.log(globalData);
@@ -27,52 +27,126 @@ function genererGallery() {
   });
 }
 genererGallery();
-// // Filtre
-// Objet
-let Filtre = async () => {
-  const boutonFiltrerObjet = document.querySelector("#objets");
+// // Filtre********************************************************
+// **********************************************************************
+// Objet**************************************************************
 
-  boutonFiltrerObjet.addEventListener("click", function () {
-    const projetFiltrees = globalData.filter(function (globalData) {
-      return globalData.categoryId === 1;
-    });
-    console.log(projetFiltrees);
-    document.querySelector("#gallery").innerHTML = "";
-    // genererGallery(projetFiltrees);
-  });
-  genererGallery(boutonFiltrerObjet);
-  // appartement
-  const boutonFiltrerAppartements = document.querySelector("#appartements");
+const boutonFiltrerObjet = document.querySelector("#objets");
 
-  boutonFiltrerAppartements.addEventListener("click", function () {
-    const projetFiltrees = globalData.filter(function (globalData) {
-      return globalData.categoryId === 2;
-    });
-    console.log(projetFiltrees);
-    document.querySelector("#gallery").innerHTML = "";
+boutonFiltrerObjet.addEventListener("click", function () {
+  const projetFiltrees = globalData.filter(function (globalData) {
+    return globalData.categoryId === 1;
   });
-  genererGallery(boutonFiltrerAppartements);
-  // Hotel et restaurant
-  const boutonFiltrerHotel = document.querySelector("#hotels-restaurant");
+  console.log(projetFiltrees);
+  document.querySelector("#gallery").innerHTML = "";
 
-  boutonFiltrerHotel.addEventListener("click", function () {
-    const projetFiltrees = globalData.filter(function (globalData) {
-      return globalData.categoryId === 3;
-    });
-    console.log(projetFiltrees);
-    document.querySelector("#gallery").innerHTML = "";
-  });
-  genererGallery(boutonFiltrerHotel);
-  // Tous
-  const boutonFiltrerTous = document.querySelector("#tous");
+  for (let i = 0; i < projetFiltrees.length; i++) {
+    const article = projetFiltrees[i];
+    const sectionGallery = document.querySelector("#gallery");
+    const projetElement = document.createElement("figure");
+    const imageElement = document.createElement("img");
+    imageElement.srcset = article.imageUrl;
+    imageElement.setAttribute("alt", article.title);
+    const titleElement = document.createElement("p");
+    titleElement.innerText = article.title;
 
-  boutonFiltrerTous.addEventListener("click", function () {
-    const projetFiltrees = globalData.filter(function (globalData) {
-      return globalData.categoryId === 1, 2, 3;
-    });
-    console.log(projetFiltrees);
-    document.querySelector("#gallery").innerHTML = "";
+    sectionGallery.appendChild(projetElement);
+    projetElement.appendChild(imageElement);
+    projetElement.appendChild(titleElement);
+  }
+});
+
+// appartement**********************************************************
+const boutonFiltrerAppartements = document.querySelector("#appartements");
+
+boutonFiltrerAppartements.addEventListener("click", function () {
+  const projetFiltrees = globalData.filter(function (globalData) {
+    return globalData.categoryId === 2;
   });
-  genererGallery(boutonFiltrerTous);
-};
-Filtre();
+  console.log(projetFiltrees);
+  document.querySelector("#gallery").innerHTML = "";
+
+  for (let i = 0; i < projetFiltrees.length; i++) {
+    const article = projetFiltrees[i];
+    const sectionGallery = document.querySelector("#gallery");
+    const projetElement = document.createElement("figure");
+    const imageElement = document.createElement("img");
+    imageElement.srcset = article.imageUrl;
+    imageElement.setAttribute("alt", article.title);
+    const titleElement = document.createElement("p");
+    titleElement.innerText = article.title;
+
+    sectionGallery.appendChild(projetElement);
+    projetElement.appendChild(imageElement);
+    projetElement.appendChild(titleElement);
+  }
+});
+// Hotel et restaurant******************************************
+const boutonFiltrerHotel = document.querySelector("#hotels-restaurant");
+
+boutonFiltrerHotel.addEventListener("click", function () {
+  const projetFiltrees = globalData.filter(function (globalData) {
+    return globalData.categoryId === 3;
+  });
+  console.log(projetFiltrees);
+  document.querySelector("#gallery").innerHTML = "";
+
+  for (let i = 0; i < projetFiltrees.length; i++) {
+    const article = projetFiltrees[i];
+    const sectionGallery = document.querySelector("#gallery");
+    const projetElement = document.createElement("figure");
+    const imageElement = document.createElement("img");
+    imageElement.srcset = article.imageUrl;
+    imageElement.setAttribute("alt", article.title);
+    const titleElement = document.createElement("p");
+    titleElement.innerText = article.title;
+
+    sectionGallery.appendChild(projetElement);
+    projetElement.appendChild(imageElement);
+    projetElement.appendChild(titleElement);
+  }
+});
+// Tous****************************************************************
+const boutonFiltrerTous = document.querySelector("#tous");
+
+boutonFiltrerTous.addEventListener("click", function () {
+  const projetFiltrees = globalData.filter(function (globalData) {
+    return globalData.categoryId === 1, 2, 3;
+  });
+  console.log(projetFiltrees);
+  document.querySelector("#gallery").innerHTML = "";
+
+  for (let i = 0; i < projetFiltrees.length; i++) {
+    const article = projetFiltrees[i];
+    const sectionGallery = document.querySelector("#gallery");
+    const projetElement = document.createElement("figure");
+    const imageElement = document.createElement("img");
+    imageElement.srcset = article.imageUrl;
+    imageElement.setAttribute("alt", article.title);
+    const titleElement = document.createElement("p");
+    titleElement.innerText = article.title;
+
+    sectionGallery.appendChild(projetElement);
+    projetElement.appendChild(imageElement);
+    projetElement.appendChild(titleElement);
+  }
+});
+
+// test fonction pour crée le contenu
+// function genererContenu() {
+//   document.querySelector("#gallery").innerHTML = "";
+//   for (let i = 0; i < projetFiltrees.length; i++) {
+//     const article = projetFiltrees[i];
+//     const sectionGallery = document.querySelector("#gallery");
+//     const projetElement = document.createElement("figure");
+//     const imageElement = document.createElement("img");
+//     imageElement.srcset = article.imageUrl;
+//     imageElement.setAttribute("alt", article.title);
+//     const titleElement = document.createElement("p");
+//     titleElement.innerText = article.title;
+
+//     sectionGallery.appendChild(projetElement);
+//     projetElement.appendChild(imageElement);
+//     projetElement.appendChild(titleElement);
+//   }
+// }
