@@ -1,8 +1,10 @@
 fetch("http://localhost:5678/api/works", {
-  method: "GET",
+  method: "POST",
   headers: {
-    Authorization: "userId" + bearerToken,
+    Authorization: "Basic " + "email:password",
+    // "userId" + "Token",
   },
+  body: JSON.stringify("id", "title", "imageUrl", "categoryId", "userId"),
 })
   .then((response) => response.json())
   .then((data) => console.log(data))
