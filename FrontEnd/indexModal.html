@@ -15,16 +15,6 @@
   </head>
   <body>
     <div id="bandeau-publication"></div>
-    <a href="#modal1"></a>
-    <aside
-      id="modal1"
-      class="modal"
-      aria-hidden="true"
-      role="dialog"
-      style="display: none"
-    >
-      <div class="modal-box"></div>
-    </aside>
     <header>
       <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
       <nav>
@@ -42,6 +32,7 @@
           <img src="./assets/images/sophie-bluel.png" alt="" />
         </figure>
         <article>
+          <div id="btnArticle"></div>
           <h2>Designer d'espace</h2>
           <p>
             Je raconte votre histoire, je valorise vos idées. Je vous accompagne
@@ -61,7 +52,7 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <h2 id="projet">Mes Projets</h2>
         <div class="filtre">
           <button id="tous">Tous</button>
           <button id="objets">Objets</button>
@@ -97,5 +88,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="../Backend/modal.js"></script>
+    <script src="../Backend/Modalfunction.js"></script>
+    <script src="../Backend/script.js"></script>
   </body>
 </html>

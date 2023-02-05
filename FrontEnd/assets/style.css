@@ -307,9 +307,9 @@ margin: auto;
 	height: 100%;
 	background: rgb(0, 0, 0, 0.4);
 }
-.modal-box{
-	width: 25%;
-	height: 60%;
+#modal-box{
+	width: 35%;
+	height: 90%;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
 	padding: 20px;
@@ -339,4 +339,178 @@ padding: 10px;
 	align-items: center;
 
 
+}
+
+/* MODALBOX1 */
+#croixFermeture{
+	display: flex;
+	justify-content: flex-end;
+	text-decoration: none;
+}
+#modal-box h2{
+	display: flex;
+	justify-content: center;
+	padding: 20px 0 40px 0;
+	color: black;
+}
+#portfolioModal {
+	width: 80%;
+	height: 70%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	margin: auto;
+	z-index: 0;
+}
+#portfolioModal figure{
+	position: relative;
+}
+#portfolioModal figure img {
+	width: 100%;
+}
+#edite1{
+	text-decoration: none;
+}
+#ligne1{
+	margin: auto;
+	width: 80%;
+	border-bottom: 2px solid rgba(128, 128, 128, 0.418);
+	margin-bottom: 40px;
+}
+#btnAddPic{
+	display: flex;
+	justify-content: center;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : auto ;
+	padding: 10px 30px;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+	cursor: pointer;
+}
+#Suppr-Galerie{
+	display: flex;
+	justify-content: center;
+	text-decoration: none;
+	font-family: 'Syne';
+	font-size: small;
+	color: rgba(255, 0, 0, 0.774);
+	margin: 0 auto;
+	padding-top: 20px;
+}
+#poubelle{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	color: white;
+	background-color: black;
+	border-radius: 5px;
+	height: 20px;
+	width: 20px;
+}
+
+/* MODALE BOX 2 */
+#modal-box2{
+	width: 35%;
+	height: 90%;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 20px;
+	background-color: white;
+	border-radius: 10px;
+	
+}
+#retFerm{
+	display: flex;
+	justify-content: space-between;
+	text-decoration: none;
+	color: black;
+}
+#modal-box2 h2{
+	display: flex;
+	justify-content: center;
+	padding: 20px 0 40px 0;
+	color: black;
+}
+#addPic{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(168, 194, 194, 0.438);
+	width: 80%;
+	height: 30%;
+	border-radius: 5px;
+	margin: auto;
+}
+#addPic i {
+	display: flex;
+	justify-content: center;
+	height: 50px;
+	width: 50%;
+	color: black;
+}
+#preview{
+	height: 50%;
+
+}
+
+/* FORMULAIRE MODAL 2********* */
+/* #modal-box2 {
+	width: 50%;
+margin: auto;
+} */
+
+#modal-box2 form {
+	margin: auto;
+	width: 80%;
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#modal-box2 input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#modal-box2 label {
+	margin: 2em 0 1em 0;
+}
+#modal-box2 textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#erreur {
+	color: red
+}
+#ligne2{
+	margin: auto;
+	width: 80%;
+	border-bottom: 2px solid rgba(128, 128, 128, 0.418);
+	/* margin-top: 40px; */
+	margin: 40px auto;
+}
+#btnValider{
+	display: flex;
+	justify-content: center;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : auto ;
+	padding: 10px 30px;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+	cursor: pointer;
 }
