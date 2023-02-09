@@ -32,3 +32,23 @@ document
 document.getElementById("btnAjoutPhoto").addEventListener("click", function () {
   document.getElementById("photo-input").click();
 });
+
+// // Bouton de suppression
+// deleteIcon.addEventListener("click", () => {
+//   const imageId = image.getAttribute("data-id");
+//   if (!imageId) return;
+
+//   fetch(`http://localhost:5678/api/works/${imageId}`, {
+//     method: "DELETE",
+//     headers: {
+//       "Authorization": `Bearer`+ bearerToken,
+//     },
+//   })
+//     .then((response) => {
+//       if (!response.ok) throw new Error("Failed to delete image");
+//       imagesContainer.removeChild(image);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// });

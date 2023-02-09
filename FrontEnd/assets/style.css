@@ -458,9 +458,8 @@ padding: 10px;
 #addPic i {
 	display: flex;
 	justify-content: center;
-	height: 50px;
-	width: 50%;
-	color: black;
+    color: #43748f;
+	align-items: flex-end;
 }
 #addPic p{
 	font-size: 0.9em;
