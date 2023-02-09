@@ -198,12 +198,15 @@ if (bearerToken) {
 
   const optionObjet = document.createElement("option");
   optionObjet.innerText = "Objets";
+  optionObjet.setAttribute("value", "1");
 
   const optionAppartements = document.createElement("option");
   optionAppartements.innerText = "Appartements";
+  optionAppartements.setAttribute("value", "2");
 
   const optionHotels = document.createElement("option");
   optionHotels.innerText = "Hotels & restaurants";
+  optionHotels.setAttribute("value", "3");
 
   // Ligne + bouton valider
   const ligne2 = document.createElement("div");
@@ -241,16 +244,19 @@ if (bearerToken) {
 
   modalBox22.appendChild(ligne2);
   modalBox22.appendChild(btnValide);
-  // test preview
+  //preview img chargé
   inputImg.addEventListener("change", function () {
     const preview = document.createElement("img");
     preview.setAttribute("id", "preview");
+    preview.style.height = "100%";
+    preview.style.objectFit = "cover";
     const file = this.files[0];
     const reader = new FileReader();
     reader.addEventListener("load", function () {
       preview.setAttribute("src", reader.result);
     });
     reader.readAsDataURL(file);
+    addPic.innerHTML = "";
     addPic.appendChild(preview);
   });
 
@@ -294,16 +300,12 @@ if (bearerToken) {
   genererGallery();
 
   // Login => en logout
-  // test
   const loginButton = document.getElementById("login-button");
   const logoutButton = document.getElementById("logout-button");
 
   if (localStorage.getItem("bearerToken")) {
     loginButton.style.display = "none";
     logoutButton.style.display = "inline-block";
-    // const navUl = document.getElementById("navUl");
-    // const navLi = document.createElement("li");
-    // navUl.appendChild(navLi);
     logoutButton.innerText = "Logout";
   } else {
     loginButton.style.display = "inline-block";
@@ -323,10 +325,6 @@ if (bearerToken) {
   const textInput2 = document.getElementById("categorie");
   const fileInput = document.getElementById("photo-input");
 
-  // openModal2Button.addEventListener("click", function() {
-  //   modal2.style.display = "block";
-  // });
-
   validateModal2Button.addEventListener("click", function () {
     // Récupération des données de la modale
     const title = textInput1.value;
@@ -338,6 +336,21 @@ if (bearerToken) {
     localStorage.setItem("title", title);
     localStorage.setItem("categoryId", catId);
     localStorage.setItem("imageUrl", JSON.stringify(fileImg));
+    // Remise à zéro du formulaire
+    textInput1.value = "";
+    textInput2.value = "";
+    fileInput.value = "";
+    // supression preview + re affichage des elements
+    const preview = document.getElementById("preview");
+    const addPic = document.getElementById("addPic");
+    addPic.appendChild(iconePic);
+    addPic.appendChild(formImg);
+    formImg.appendChild(inputImg);
+
+    addPic.appendChild(btnAjoutPhoto);
+    addPic.appendChild(infoPic);
+
+    addPic.removeChild(preview);
     // Fermeture de la modale
     document.getElementById("modal2").style.display = "none";
   });
