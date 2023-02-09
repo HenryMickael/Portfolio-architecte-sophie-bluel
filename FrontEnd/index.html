@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Sophie Bluel - Architecte d'intérieur</title>
+    <title>Admin - Sophie Bluel - Architecte d'intérieur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,13 +14,15 @@
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
+    <div id="bandeau-publication"></div>
     <header>
       <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
       <nav>
-        <ul>
+        <ul id="navUl">
           <a href="./index.html#projets"><li>projets</li></a>
           <a href="./index.html#contact"><li>contact</li></a>
-          <a href="./Login.html"><li>login</li></a>
+          <a href="./Login.html" id="login-button"><li>login</li></a>
+          <a href="./index.html#projets" id="logout-button"><li></li></a>
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
@@ -31,6 +33,7 @@
           <img src="./assets/images/sophie-bluel.png" alt="" />
         </figure>
         <article>
+          <div id="btnArticle"></div>
           <h2>Designer d'espace</h2>
           <p>
             Je raconte votre histoire, je valorise vos idées. Je vous accompagne
@@ -50,7 +53,7 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <h2 id="projet">Mes Projets</h2>
         <div class="filtre">
           <button id="tous">Tous</button>
           <button id="objets">Objets</button>
@@ -81,6 +84,12 @@
         </ul>
       </nav>
     </footer>
+    <script
+      src="https://kit.fontawesome.com/1100e2f259.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../Backend/modal.js"></script>
+    <script src="../Backend/Modalfunction.js"></script>
     <script src="../Backend/script.js"></script>
   </body>
 </html>
