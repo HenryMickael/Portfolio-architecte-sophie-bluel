@@ -456,6 +456,8 @@ padding: 10px;
 	margin: auto;
 }
 #addPic i {
+	margin-top: 50px;
+	font-size:8em;
 	display: flex;
 	justify-content: center;
     color: #43748f;

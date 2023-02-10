@@ -147,9 +147,7 @@ if (bearerToken) {
   inputImg.setAttribute("name", "+ Ajouter vos photos");
   inputImg.setAttribute("type", "file");
   inputImg.setAttribute("id", "photo-input");
-  inputImg.setAttribute("accept", ".jpeg");
-  inputImg.setAttribute("accept", ".jpg");
-  inputImg.setAttribute("accept", ".png");
+  inputImg.setAttribute("accept", ".jpeg, .jpg, .png");
   const btnAjoutPhoto = document.createElement("button");
   btnAjoutPhoto.setAttribute("id", "btnAjoutPhoto");
   btnAjoutPhoto.innerText = "+ Ajouter photo";
@@ -252,13 +250,36 @@ if (bearerToken) {
   });
 
   //gallery image fetch complete*************************************************************************
+
   function fetchData() {
     return fetch("http://localhost:5678/api/works")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Error deleting work with ID ${id}: ${response.statusText}`
+          );
+        }
+        return response.json();
+      })
       .then((data) => {
         globalData = data;
       });
   }
+  function deleteWork(id) {
+    console.log("bearerToken: ", bearerToken);
+    return fetch(`http://localhost:5678/api/works/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ` + bearerToken,
+      },
+      body: JSON.stringify({ id: id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Data deleted from API:", data);
+      });
+  }
+
   function genererGallery() {
     fetchData().then(() => {
       console.log(globalData);
@@ -273,10 +294,11 @@ if (bearerToken) {
         edite1.setAttribute("href", "#");
         edite1.setAttribute("id", "edite1");
         edite1.innerText = "éditer";
-        //   test poubelle
+        //  poubelle + suppression
         const poubelle = document.createElement("a");
         poubelle.setAttribute("href", "#");
         poubelle.setAttribute("id", "poubelle");
+        poubelle.setAttribute("workId", article.id);
         const iconePoubelle = document.createElement("i");
         iconePoubelle.setAttribute("class", "fa-solid fa-trash-can");
 
@@ -285,13 +307,19 @@ if (bearerToken) {
         projetElement.appendChild(poubelle);
         poubelle.appendChild(iconePoubelle);
         projetElement.appendChild(edite1);
+
+        poubelle.addEventListener("click", (event) => {
+          event.preventDefault();
+          const workId = event.currentTarget.getAttribute("workId");
+          deleteWork(workId).then(() => {});
+        });
       }
     });
   }
+
   genererGallery();
 
   // Login => en logout
-  // test
   const loginButton = document.getElementById("login-button");
   const logoutButton = document.getElementById("logout-button");
 
@@ -405,3 +433,24 @@ if (bearerToken) {
 //   .then((response) => response.json())
 //   .then((data) => console.log(data))
 //   .catch((error) => console.error(error));
+
+// // Bouton de suppression
+// const deleteIcon = getElementById("poubelle")
+// deleteIcon.addEventListener("click", () => {
+//   const imageId = image.getAttribute("data-id");
+//   if (!imageId) return;
+
+//   fetch(`http://localhost:5678/api/works/${imageId}`, {
+//     method: "DELETE",
+//     headers: {
+//       "Authorization": `Bearer`+ bearerToken,
+//     },
+//   })
+//     .then((response) => {
+//       if (!response.ok) throw new Error("Failed to delete image");
+//       imagesContainer.removeChild(image);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// });
