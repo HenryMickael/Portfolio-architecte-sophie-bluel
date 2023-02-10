@@ -200,9 +200,57 @@ if (bearerToken) {
   // Ligne + bouton valider
   const ligne2 = document.createElement("div");
   ligne2.setAttribute("id", "ligne2");
+
   const btnValide = document.createElement("button");
   btnValide.setAttribute("id", "btnValider");
+  btnValide.style.display = "none";
   btnValide.innerText = "Valider";
+  //   test affiche btnValide
+  //   **********************************************************
+  console.log(selectCategorie);
+  selectCategorie.addEventListener("input", function () {
+    if (
+      inputImg.value &&
+      inputTitre.value &&
+      (selectCategorie.value === "1" ||
+        selectCategorie.value === "2" ||
+        selectCategorie.value === "3")
+    ) {
+      btnValide.style.display = "flex";
+    } else {
+      btnValide.style.display = "none";
+    }
+  });
+
+  inputImg.addEventListener("input", function () {
+    if (
+      inputImg.value &&
+      inputTitre.value &&
+      (selectCategorie.value === "1" ||
+        selectCategorie.value === "2" ||
+        selectCategorie.value === "3")
+    ) {
+      btnValide.style.display = "flex";
+    } else {
+      btnValide.style.display = "none";
+    }
+  });
+
+  inputTitre.addEventListener("input", function () {
+    if (
+      inputImg.value &&
+      inputTitre.value &&
+      (selectCategorie.value === "1" ||
+        selectCategorie.value === "2" ||
+        selectCategorie.value === "3")
+    ) {
+      btnValide.style.display = "flex";
+    } else {
+      btnValide.style.display = "none";
+    }
+  });
+
+  // *******************************************************************
 
   modalBox22.appendChild(retFerm);
   retFerm.appendChild(retour2);

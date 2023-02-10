@@ -131,22 +131,3 @@ boutonFiltrerTous.addEventListener("click", function () {
     projetElement.appendChild(titleElement);
   }
 });
-
-// test fonction pour crée le contenu
-// function genererContenu() {
-//   document.querySelector("#gallery").innerHTML = "";
-//   for (let i = 0; i < projetFiltrees.length; i++) {
-//     const article = projetFiltrees[i];
-//     const sectionGallery = document.querySelector("#gallery");
-//     const projetElement = document.createElement("figure");
-//     const imageElement = document.createElement("img");
-//     imageElement.srcset = article.imageUrl;
-//     imageElement.setAttribute("alt", article.title);
-//     const titleElement = document.createElement("p");
-//     titleElement.innerText = article.title;
-
-//     sectionGallery.appendChild(projetElement);
-//     projetElement.appendChild(imageElement);
-//     projetElement.appendChild(titleElement);
-//   }
-// }

@@ -328,7 +328,7 @@ if (bearerToken) {
   }
 
   genererGallery();
-
+  // **********************************************************************
   // Login => en logout
   const loginButton = document.getElementById("login-button");
   const logoutButton = document.getElementById("logout-button");
@@ -345,6 +345,51 @@ if (bearerToken) {
   logoutButton.addEventListener("click", () => {
     localStorage.removeItem("bearerToken");
     window.location.href = "/FrontEnd/";
+  });
+
+  //   test affiche btnValide
+  //   **********************************************************
+  console.log(selectCategorie);
+  selectCategorie.addEventListener("input", function () {
+    if (
+      inputImg.value &&
+      inputTitre.value &&
+      (selectCategorie.value === "1" ||
+        selectCategorie.value === "2" ||
+        selectCategorie.value === "3")
+    ) {
+      btnValide.style.display = "flex";
+    } else {
+      btnValide.style.display = "none";
+    }
+  });
+
+  inputImg.addEventListener("input", function () {
+    if (
+      inputImg.value &&
+      inputTitre.value &&
+      (selectCategorie.value === "1" ||
+        selectCategorie.value === "2" ||
+        selectCategorie.value === "3")
+    ) {
+      btnValide.style.display = "flex";
+    } else {
+      btnValide.style.display = "none";
+    }
+  });
+
+  inputTitre.addEventListener("input", function () {
+    if (
+      inputImg.value &&
+      inputTitre.value &&
+      (selectCategorie.value === "1" ||
+        selectCategorie.value === "2" ||
+        selectCategorie.value === "3")
+    ) {
+      btnValide.style.display = "flex";
+    } else {
+      btnValide.style.display = "none";
+    }
   });
   // }
   // fermeture du if avant test
