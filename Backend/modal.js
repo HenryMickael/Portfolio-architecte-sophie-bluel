@@ -1,12 +1,3 @@
-// fetch("http://localhost:5678/api/works", {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//     Authorization: `Bearer ${bearerToken}`,
-//   },
-// })
-//   .then((response) => response.json())
-//   .then((data) => {
 const bearerToken = localStorage.getItem("bearerToken");
 console.log(bearerToken);
 
@@ -298,6 +289,7 @@ if (bearerToken) {
         const sectionGallery = document.querySelector("#portfolioModal");
         const projetElement = document.createElement("figure");
         const imageElement = document.createElement("img");
+
         imageElement.srcset = article.imageUrl;
         imageElement.setAttribute("alt", article.title);
         const edite1 = document.createElement("a");
@@ -391,43 +383,110 @@ if (bearerToken) {
       btnValide.style.display = "none";
     }
   });
-  // }
-  // fermeture du if avant test
-
-  // // Test recuperation donné et envoi fetch
+  //   Test envoi works
   const validateModal2Button = document.getElementById("btnValider");
   const textInput1 = document.getElementById("Titre");
   const textInput2 = document.getElementById("categorie");
   const fileInput = document.getElementById("photo-input");
+  //   recuperation id + 1 dans fetch
 
+  // // Test recuperation donné et envoi fetch
   validateModal2Button.addEventListener("click", function () {
     // Récupération des données de la modale
     const title = textInput1.value;
     const catId = textInput2.value;
     const fileImg = fileInput.files[0];
+    // const userId = localStorage.getItem("userId");
+    // const userId = localStorage.getItem.userId.value;
     console.log(title, catId, fileImg);
 
-    // Stockage des données dans le local storage
-    localStorage.setItem("title", title);
-    localStorage.setItem("categoryId", catId);
-    localStorage.setItem("imageUrl", JSON.stringify(fileImg));
-    // Remise à zéro du formulaire
-    textInput1.value = "";
-    textInput2.value = "";
-    fileInput.value = "";
-    // supression preview + re affichage des elements
-    const preview = document.getElementById("preview");
-    const addPic = document.getElementById("addPic");
-    addPic.appendChild(iconePic);
-    addPic.appendChild(formImg);
-    formImg.appendChild(inputImg);
+    // Préparation de la requête
+    const formData = new FormData();
+    formData.append("image", fileImg);
+    formData.append("title", title);
+    formData.append("category", catId);
 
-    addPic.appendChild(btnAjoutPhoto);
-    addPic.appendChild(infoPic);
+    // Envoi des données au serveur
+    fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      accept: "application/json",
+      headers: {
+        Authorization: "Bearer " + bearerToken,
+        // accept: "application/json",
+        // "Content-Type": "multipart/form-data",
 
-    addPic.removeChild(preview);
-    // Fermeture de la modale
-    document.getElementById("modal2").style.display = "none";
+        body: formData,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        console.log(Error);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        // Remise à zéro du formulaire
+        textInput1.value = "";
+        textInput2.value = "";
+        fileInput.value = "";
+        // supression preview + re affichage des elements
+        const preview = document.getElementById("preview");
+        const addPic = document.getElementById("addPic");
+        addPic.appendChild(iconePic);
+        addPic.appendChild(formImg);
+        formImg.appendChild(inputImg);
+        addPic.appendChild(btnAjoutPhoto);
+        addPic.appendChild(infoPic);
+        addPic.removeChild(preview);
+        // Fermeture de la modale
+        document.getElementById("modal2").style.display = "none";
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
   });
   // *****************************************************************
 }
+
+// ********************************************************************
+// *****************************************************************
+// ******************************************************************
+//   // // Test 1 recuperation donné et envoi fetch()
+//   const validateModal2Button = document.getElementById("btnValider");
+//   const textInput1 = document.getElementById("Titre");
+//   const textInput2 = document.getElementById("categorie");
+//   const fileInput = document.getElementById("photo-input");
+
+//   validateModal2Button.addEventListener("click", function () {
+//     // Récupération des données de la modale
+//     const title = textInput1.value;
+//     const catId = textInput2.value;
+//     const fileImg = fileInput.files[0];
+//     console.log(title, catId, fileImg);
+
+//     // Stockage des données dans le local storage
+//     localStorage.setItem("title", title);
+//     localStorage.setItem("categoryId", catId);
+//     localStorage.setItem("imageUrl", JSON.stringify(fileImg));
+//     // Remise à zéro du formulaire
+//     textInput1.value = "";
+//     textInput2.value = "";
+//     fileInput.value = "";
+//     // supression preview + re affichage des elements
+//     const preview = document.getElementById("preview");
+//     const addPic = document.getElementById("addPic");
+//     addPic.appendChild(iconePic);
+//     addPic.appendChild(formImg);
+//     formImg.appendChild(inputImg);
+
+//     addPic.appendChild(btnAjoutPhoto);
+//     addPic.appendChild(infoPic);
+
+//     addPic.removeChild(preview);
+//     // Fermeture de la modale
+//     document.getElementById("modal2").style.display = "none";
+//   });
+//   // *****************************************************************
+// }

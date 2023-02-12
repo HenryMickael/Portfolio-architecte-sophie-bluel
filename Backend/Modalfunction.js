@@ -32,23 +32,20 @@ document
 document.getElementById("btnAjoutPhoto").addEventListener("click", function () {
   document.getElementById("photo-input").click();
 });
+//  fermeture modal si click exterieur
+const modal = document.querySelector(".modal");
+const modalGen1 = document.querySelector("#modal1");
+const modalGen2 = document.querySelector("#modal2");
+const modal1 = document.querySelector("#modal-box");
+const modal2 = document.querySelector("#modal-box2");
 
-// // Bouton de suppression
-// deleteIcon.addEventListener("click", () => {
-//   const imageId = image.getAttribute("data-id");
-//   if (!imageId) return;
-
-//   fetch(`http://localhost:5678/api/works/${imageId}`, {
-//     method: "DELETE",
-//     headers: {
-//       "Authorization": `Bearer`+ bearerToken,
-//     },
-//   })
-//     .then((response) => {
-//       if (!response.ok) throw new Error("Failed to delete image");
-//       imagesContainer.removeChild(image);
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// });
+modalGen1.addEventListener("click", function (event) {
+  if (event.target !== modal1 && event.target.closest("#modal-box") === null) {
+    modalGen1.style.display = "none";
+  }
+});
+modalGen2.addEventListener("click", function (event) {
+  if (event.target !== modal2 && event.target.closest("#modal-box2") === null) {
+    modalGen2.style.display = "none";
+  }
+});

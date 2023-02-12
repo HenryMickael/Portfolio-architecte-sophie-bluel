@@ -404,6 +404,7 @@ padding: 10px;
 	color: rgba(255, 0, 0, 0.774);
 	margin: 0 auto;
 	padding-top: 20px;
+	width: fit-content;
 }
 #poubelle{
 	display: flex;
@@ -417,6 +418,26 @@ padding: 10px;
 	border-radius: 5px;
 	height: 20px;
 	width: 20px;
+}
+#agrandissement{
+	display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    right: 27px;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    height: 20px;
+    width: 20px;
+	text-decoration: none;
+}
+#imgModal2:hover + #agrandissement {
+	display: flex;
+  }
+#agrandissement:hover {
+	display: flex;
 }
 
 /* MODALE BOX 2 */
@@ -471,12 +492,6 @@ padding: 10px;
 	height: 100%;
 }
 
-/* FORMULAIRE MODAL 2********* */
-/* #modal-box2 {
-	width: 50%;
-margin: auto;
-} */
-
 #modal-box2 form {
 	margin: auto;
 	width: 80%;
@@ -507,7 +522,7 @@ margin: auto;
 	width: 80%;
 	border-bottom: 2px solid rgba(128, 128, 128, 0.418);
 	/* margin-top: 40px; */
-	margin: 40px auto;
+	margin: 50px auto;
 }
 #btnValider{
 	display: flex;
@@ -522,6 +537,22 @@ margin: auto;
 	border-radius: 60px ;
 	border: none;
 	cursor: pointer;
+	width: 230px;
+}
+#btnValiderGray{
+	display: flex;
+	justify-content: center;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: gray;
+	margin : auto ;
+	padding: 10px 30px;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+	width: 160px;
+	height: 15px;
 }
 /* cacher bouton photo */
 #photo-input {
