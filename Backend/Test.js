@@ -420,9 +420,9 @@ if (bearerToken) {
 
     // Préparation de la requête
     const formData = new FormData();
-    formData.append("image=", fileImg);
-    formData.append("title=", title);
-    formData.append("category=", catId);
+    formData.append("image", fileImg);
+    formData.append("title", title);
+    formData.append("category", catId);
     // console.log(formData);
     // Envoi des données au serveur
     fetch("http://localhost:5678/api/works", {
