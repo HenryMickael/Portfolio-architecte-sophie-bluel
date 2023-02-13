@@ -203,7 +203,7 @@ if (bearerToken) {
   btnValide.innerText = "Valider";
   btnValide.style.display = "none";
 
-  const btnValideGray = document.createElement("p");
+  const btnValideGray = document.createElement("button");
   btnValideGray.setAttribute("id", "btnValiderGray");
   btnValideGray.innerText = "Valider";
 
@@ -399,6 +399,21 @@ if (bearerToken) {
     } else {
       btnValide.style.display = "none";
       btnValideGray.style.display = "flex";
+    }
+  });
+  //erreur pas tout les champ rempli
+  btnValiderGray.addEventListener("click", function () {
+    if (
+      !inputImg.value ||
+      !inputTitre.value ||
+      (selectCategorie.value !== "1" &&
+        selectCategorie.value !== "2" &&
+        selectCategorie.value !== "3")
+    ) {
+      const ChampVide = document.createElement("p");
+      ChampVide.setAttribute("id", "champVide");
+      ChampVide.innerText = "Veuillez remplir tous les champs";
+      modalBox22.appendChild(ChampVide);
     }
   });
   // envoi works
