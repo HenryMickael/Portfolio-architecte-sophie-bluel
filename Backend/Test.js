@@ -268,6 +268,7 @@ if (bearerToken) {
         globalData = data;
       });
   }
+
   function deleteWork(id) {
     console.log("bearerToken: ", bearerToken);
     return fetch(`http://localhost:5678/api/works/${id}`, {
@@ -277,10 +278,12 @@ if (bearerToken) {
       },
       body: JSON.stringify({ id: id }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("projet supprimé de l' API:", data);
-      });
+      .then((res) => {
+        if (res.ok) {
+          alert("Votre élément a été supprimé avec succès !");
+        }
+      })
+      .catch((error) => console.log(error));
   }
 
   function genererGallery() {
@@ -408,48 +411,34 @@ if (bearerToken) {
   const textInput2 = document.getElementById("categorie");
   const fileInput = document.getElementById("photo-input");
 
-  // // Test recuperation donné et envoi fetch
   validateModal2Button.addEventListener("click", function () {
-    // Récupération des données de la modale
     const title = textInput1.value;
     const catId = textInput2.value;
     const fileImg = fileInput.files[0];
-    // const userId = localStorage.getItem("userId");
-    // const userId = localStorage.getItem.userId.value;
-    console.log(title, catId, fileImg);
 
-    // Préparation de la requête
     const formData = new FormData();
     formData.append("image", fileImg);
     formData.append("title", title);
     formData.append("category", catId);
-    // console.log(formData);
-    // Envoi des données au serveur
+
     fetch("http://localhost:5678/api/works", {
       method: "POST",
-      //   accept: "application/json",
       headers: {
         Authorization: "Bearer " + bearerToken,
-        // accept: "application/json",
-        // "Content-Type": "multipart/form-data",
-
-        body: formData,
       },
+      body: formData,
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Reponse pas ok");
+      .then((res) => {
+        if (res.ok) {
+          alert("Votre projet a été ajouté avec succès");
+          return res.json();
         }
-        console.log(Error);
-        return response.json();
       })
       .then((data) => {
         console.log(data);
-        // Remise à zéro du formulaire
         textInput1.value = "";
         textInput2.value = "";
         fileInput.value = "";
-        // supression preview + re affichage des elements
         const preview = document.getElementById("preview");
         const addPic = document.getElementById("addPic");
         addPic.appendChild(iconePic);
@@ -458,53 +447,10 @@ if (bearerToken) {
         addPic.appendChild(btnAjoutPhoto);
         addPic.appendChild(infoPic);
         addPic.removeChild(preview);
-        // Fermeture de la modale
         document.getElementById("modal2").style.display = "none";
       })
       .catch((error) => {
         console.error("Problème d'envoi", error);
       });
   });
-  // *****************************************************************
 }
-
-// ********************************************************************
-// *****************************************************************
-// ******************************************************************
-//   // // Test 1 recuperation donné et envoi fetch()
-//   const validateModal2Button = document.getElementById("btnValider");
-//   const textInput1 = document.getElementById("Titre");
-//   const textInput2 = document.getElementById("categorie");
-//   const fileInput = document.getElementById("photo-input");
-
-//   validateModal2Button.addEventListener("click", function () {
-//     // Récupération des données de la modale
-//     const title = textInput1.value;
-//     const catId = textInput2.value;
-//     const fileImg = fileInput.files[0];
-//     console.log(title, catId, fileImg);
-
-//     // Stockage des données dans le local storage
-//     localStorage.setItem("title", title);
-//     localStorage.setItem("categoryId", catId);
-//     localStorage.setItem("imageUrl", JSON.stringify(fileImg));
-//     // Remise à zéro du formulaire
-//     textInput1.value = "";
-//     textInput2.value = "";
-//     fileInput.value = "";
-//     // supression preview + re affichage des elements
-//     const preview = document.getElementById("preview");
-//     const addPic = document.getElementById("addPic");
-//     addPic.appendChild(iconePic);
-//     addPic.appendChild(formImg);
-//     formImg.appendChild(inputImg);
-
-//     addPic.appendChild(btnAjoutPhoto);
-//     addPic.appendChild(infoPic);
-
-//     addPic.removeChild(preview);
-//     // Fermeture de la modale
-//     document.getElementById("modal2").style.display = "none";
-//   });
-//   // *****************************************************************
-// }

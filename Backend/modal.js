@@ -78,8 +78,6 @@ if (bearerToken) {
   const aside2 = document.createElement("aside");
   aside2.setAttribute("id", "modal2");
   aside2.setAttribute("class", "modal");
-  aside2.setAttribute("aria-hidden", "true");
-  aside2.setAttribute("role", "dialog");
   aside2.setAttribute("style", "display: none");
   const modalBox2 = document.createElement("div");
   modalBox2.setAttribute("id", "modal-box2");
@@ -147,9 +145,7 @@ if (bearerToken) {
   inputImg.setAttribute("name", "+ Ajouter vos photos");
   inputImg.setAttribute("type", "file");
   inputImg.setAttribute("id", "photo-input");
-  inputImg.setAttribute("accept", ".jpeg");
-  inputImg.setAttribute("accept", ".jpg");
-  inputImg.setAttribute("accept", ".png");
+  inputImg.setAttribute("accept", "image/jpeg, image/jpg, image/png");
   const btnAjoutPhoto = document.createElement("button");
   btnAjoutPhoto.setAttribute("id", "btnAjoutPhoto");
   btnAjoutPhoto.innerText = "+ Ajouter photo";
@@ -205,6 +201,11 @@ if (bearerToken) {
   const btnValide = document.createElement("button");
   btnValide.setAttribute("id", "btnValider");
   btnValide.innerText = "Valider";
+  btnValide.style.display = "none";
+
+  const btnValideGray = document.createElement("p");
+  btnValideGray.setAttribute("id", "btnValiderGray");
+  btnValideGray.innerText = "Valider";
 
   modalBox22.appendChild(retFerm);
   retFerm.appendChild(retour2);
@@ -235,6 +236,7 @@ if (bearerToken) {
 
   modalBox22.appendChild(ligne2);
   modalBox22.appendChild(btnValide);
+  modalBox22.appendChild(btnValideGray);
   //preview img chargé
   inputImg.addEventListener("change", function () {
     const preview = document.createElement("img");
@@ -257,7 +259,7 @@ if (bearerToken) {
       .then((response) => {
         if (!response.ok) {
           throw new Error(
-            `Error deleting work with ID ${id}: ${response.statusText}`
+            `Erreurlors de la suppression de l' ID ${id}: ${response.statusText}`
           );
         }
         return response.json();
@@ -266,6 +268,7 @@ if (bearerToken) {
         globalData = data;
       });
   }
+
   function deleteWork(id) {
     console.log("bearerToken: ", bearerToken);
     return fetch(`http://localhost:5678/api/works/${id}`, {
@@ -275,10 +278,12 @@ if (bearerToken) {
       },
       body: JSON.stringify({ id: id }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Data deleted from API:", data);
-      });
+      .then((res) => {
+        if (res.ok) {
+          alert("Votre élément a été supprimé avec succès !");
+        }
+      })
+      .catch((error) => console.log(error));
   }
 
   function genererGallery() {
@@ -289,13 +294,19 @@ if (bearerToken) {
         const sectionGallery = document.querySelector("#portfolioModal");
         const projetElement = document.createElement("figure");
         const imageElement = document.createElement("img");
-
+        imageElement.setAttribute("id", "imgModal2");
         imageElement.srcset = article.imageUrl;
         imageElement.setAttribute("alt", article.title);
         const edite1 = document.createElement("a");
         edite1.setAttribute("href", "#");
         edite1.setAttribute("id", "edite1");
         edite1.innerText = "éditer";
+        // icone agrandissement
+        const agrandissement = document.createElement("a");
+        agrandissement.setAttribute("href", "#");
+        agrandissement.setAttribute("id", "agrandissement");
+        const iconeAgrandissement = document.createElement("i");
+        iconeAgrandissement.setAttribute("class", "fa fa-duotone fa-maximize");
         //  poubelle + suppression
         const poubelle = document.createElement("a");
         poubelle.setAttribute("href", "#");
@@ -306,6 +317,8 @@ if (bearerToken) {
 
         sectionGallery.appendChild(projetElement);
         projetElement.appendChild(imageElement);
+        projetElement.appendChild(agrandissement);
+        agrandissement.appendChild(iconeAgrandissement);
         projetElement.appendChild(poubelle);
         poubelle.appendChild(iconePoubelle);
         projetElement.appendChild(edite1);
@@ -339,9 +352,8 @@ if (bearerToken) {
     window.location.href = "/FrontEnd/";
   });
 
-  //   test affiche btnValide
+  //   affiche btnValide
   //   **********************************************************
-  console.log(selectCategorie);
   selectCategorie.addEventListener("input", function () {
     if (
       inputImg.value &&
@@ -351,8 +363,10 @@ if (bearerToken) {
         selectCategorie.value === "3")
     ) {
       btnValide.style.display = "flex";
+      btnValideGray.style.display = "none";
     } else {
       btnValide.style.display = "none";
+      btnValideGray.style.display = "flex";
     }
   });
 
@@ -365,8 +379,10 @@ if (bearerToken) {
         selectCategorie.value === "3")
     ) {
       btnValide.style.display = "flex";
+      btnValideGray.style.display = "none";
     } else {
       btnValide.style.display = "none";
+      btnValideGray.style.display = "flex";
     }
   });
 
@@ -379,59 +395,46 @@ if (bearerToken) {
         selectCategorie.value === "3")
     ) {
       btnValide.style.display = "flex";
+      btnValideGray.style.display = "none";
     } else {
       btnValide.style.display = "none";
+      btnValideGray.style.display = "flex";
     }
   });
-  //   Test envoi works
+  // envoi works
   const validateModal2Button = document.getElementById("btnValider");
   const textInput1 = document.getElementById("Titre");
   const textInput2 = document.getElementById("categorie");
   const fileInput = document.getElementById("photo-input");
-  //   recuperation id + 1 dans fetch
 
-  // // Test recuperation donné et envoi fetch
   validateModal2Button.addEventListener("click", function () {
-    // Récupération des données de la modale
     const title = textInput1.value;
     const catId = textInput2.value;
     const fileImg = fileInput.files[0];
-    // const userId = localStorage.getItem("userId");
-    // const userId = localStorage.getItem.userId.value;
-    console.log(title, catId, fileImg);
 
-    // Préparation de la requête
     const formData = new FormData();
     formData.append("image", fileImg);
     formData.append("title", title);
     formData.append("category", catId);
 
-    // Envoi des données au serveur
     fetch("http://localhost:5678/api/works", {
       method: "POST",
-      accept: "application/json",
       headers: {
         Authorization: "Bearer " + bearerToken,
-        // accept: "application/json",
-        // "Content-Type": "multipart/form-data",
-
-        body: formData,
       },
+      body: formData,
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+      .then((res) => {
+        if (res.ok) {
+          alert("Votre projet a été ajouté avec succès");
+          return res.json();
         }
-        console.log(Error);
-        return response.json();
       })
       .then((data) => {
         console.log(data);
-        // Remise à zéro du formulaire
         textInput1.value = "";
         textInput2.value = "";
         fileInput.value = "";
-        // supression preview + re affichage des elements
         const preview = document.getElementById("preview");
         const addPic = document.getElementById("addPic");
         addPic.appendChild(iconePic);
@@ -440,53 +443,10 @@ if (bearerToken) {
         addPic.appendChild(btnAjoutPhoto);
         addPic.appendChild(infoPic);
         addPic.removeChild(preview);
-        // Fermeture de la modale
         document.getElementById("modal2").style.display = "none";
       })
       .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
+        console.error("Problème d'envoi", error);
       });
   });
-  // *****************************************************************
 }
-
-// ********************************************************************
-// *****************************************************************
-// ******************************************************************
-//   // // Test 1 recuperation donné et envoi fetch()
-//   const validateModal2Button = document.getElementById("btnValider");
-//   const textInput1 = document.getElementById("Titre");
-//   const textInput2 = document.getElementById("categorie");
-//   const fileInput = document.getElementById("photo-input");
-
-//   validateModal2Button.addEventListener("click", function () {
-//     // Récupération des données de la modale
-//     const title = textInput1.value;
-//     const catId = textInput2.value;
-//     const fileImg = fileInput.files[0];
-//     console.log(title, catId, fileImg);
-
-//     // Stockage des données dans le local storage
-//     localStorage.setItem("title", title);
-//     localStorage.setItem("categoryId", catId);
-//     localStorage.setItem("imageUrl", JSON.stringify(fileImg));
-//     // Remise à zéro du formulaire
-//     textInput1.value = "";
-//     textInput2.value = "";
-//     fileInput.value = "";
-//     // supression preview + re affichage des elements
-//     const preview = document.getElementById("preview");
-//     const addPic = document.getElementById("addPic");
-//     addPic.appendChild(iconePic);
-//     addPic.appendChild(formImg);
-//     formImg.appendChild(inputImg);
-
-//     addPic.appendChild(btnAjoutPhoto);
-//     addPic.appendChild(infoPic);
-
-//     addPic.removeChild(preview);
-//     // Fermeture de la modale
-//     document.getElementById("modal2").style.display = "none";
-//   });
-//   // *****************************************************************
-// }
