@@ -116,7 +116,7 @@ if (bearerToken) {
   modalBox1.appendChild(supprGalerie);
 
   // Page MOADALE 2 AJOUT PHOTO***************************************************************
-  // Retour et croix
+  // Retour et croix*******************************************************
   const modalBox22 = document.querySelector("#modal-box2");
   const retFerm = document.createElement("div");
   retFerm.setAttribute("id", "retFerm");
@@ -131,7 +131,7 @@ if (bearerToken) {
   const iconeRetour2 = document.createElement("i");
   iconeRetour2.setAttribute("class", "fa-sharp fa-solid fa-left-long");
 
-  // form image
+  // form image**********************************************************
   const titre2 = document.createElement("h2");
   titre2.innerText = "Ajout photo";
   const addPic = document.createElement("div");
@@ -152,7 +152,7 @@ if (bearerToken) {
   const infoPic = document.createElement("p");
   infoPic.innerText = "jpg, png : 4mo max";
 
-  // form titre
+  // form titre********************************************************
   const formTitre = document.createElement("form");
   formTitre.setAttribute("action", "#");
   formTitre.setAttribute("method", "post");
@@ -164,7 +164,7 @@ if (bearerToken) {
   inputTitre.setAttribute("name", "Titre");
   inputTitre.setAttribute("id", "Titre");
 
-  // Categorie
+  // Categorie*******************************************************
   const formCategorie = document.createElement("form");
   formCategorie.setAttribute("action", "#");
   formCategorie.setAttribute("method", "post");
@@ -175,7 +175,7 @@ if (bearerToken) {
   const selectCategorie = document.createElement("select");
   selectCategorie.setAttribute("name", "categorie");
   selectCategorie.setAttribute("id", "categorie");
-  // test option vide
+  // option vide*********************************************************
   const optionVide = document.createElement("option");
   optionVide.innerText = "";
   optionVide.setAttribute("selected", "selected");
@@ -195,7 +195,7 @@ if (bearerToken) {
   optionHotels.innerText = "Hotels & restaurants";
   optionHotels.setAttribute("value", "3");
 
-  // Ligne + bouton valider
+  // Ligne + bouton valider**********************************************
   const ligne2 = document.createElement("div");
   ligne2.setAttribute("id", "ligne2");
   const btnValide = document.createElement("button");
@@ -237,7 +237,7 @@ if (bearerToken) {
   modalBox22.appendChild(ligne2);
   modalBox22.appendChild(btnValide);
   modalBox22.appendChild(btnValideGray);
-  //preview img chargé
+  //preview img chargé************************************************
   inputImg.addEventListener("change", function () {
     const preview = document.createElement("img");
     preview.setAttribute("id", "preview");
@@ -268,7 +268,7 @@ if (bearerToken) {
         globalData = data;
       });
   }
-
+  // Supression projet********************************************************
   function deleteWork(id) {
     console.log("bearerToken: ", bearerToken);
     return fetch(`http://localhost:5678/api/works/${id}`, {
@@ -301,13 +301,13 @@ if (bearerToken) {
         edite1.setAttribute("href", "#");
         edite1.setAttribute("id", "edite1");
         edite1.innerText = "éditer";
-        // icone agrandissement
+        // icone agrandissement******************************************
         const agrandissement = document.createElement("a");
         agrandissement.setAttribute("href", "#");
         agrandissement.setAttribute("id", "agrandissement");
         const iconeAgrandissement = document.createElement("i");
         iconeAgrandissement.setAttribute("class", "fa fa-duotone fa-maximize");
-        //  poubelle + suppression
+        //  poubelle + suppression*******************************************
         const poubelle = document.createElement("a");
         poubelle.setAttribute("href", "#");
         poubelle.setAttribute("id", "poubelle");
@@ -334,7 +334,7 @@ if (bearerToken) {
 
   genererGallery();
   // **********************************************************************
-  // Login => en logout
+  // Login => en logout*************************************************
   const loginButton = document.getElementById("login-button");
   const logoutButton = document.getElementById("logout-button");
 
@@ -352,7 +352,7 @@ if (bearerToken) {
     window.location.href = "/FrontEnd/";
   });
 
-  //   affiche btnValide
+  //   affiche btnValide*****************************************
   //   **********************************************************
   selectCategorie.addEventListener("input", function () {
     if (
@@ -401,7 +401,7 @@ if (bearerToken) {
       btnValideGray.style.display = "flex";
     }
   });
-  //erreur pas tout les champ rempli
+  //erreur pas tout les champ rempli***************************************
   btnValiderGray.addEventListener("click", function () {
     if (
       !inputImg.value ||
@@ -416,7 +416,7 @@ if (bearerToken) {
       modalBox22.appendChild(ChampVide);
     }
   });
-  // envoi works
+  // envoi works********************************************************
   const validateModal2Button = document.getElementById("btnValider");
   const textInput1 = document.getElementById("Titre");
   const textInput2 = document.getElementById("categorie");
@@ -463,5 +463,90 @@ if (bearerToken) {
       .catch((error) => {
         console.error("Problème d'envoi", error);
       });
+  });
+  // Evenement bouton******************************************************
+  // Ouverture modale1********************************************************
+  document
+    .getElementById("modif-portfolio")
+    .addEventListener("click", function () {
+      document.getElementById("modal1").style.display = "flex";
+    });
+  //   femeture modale*******************************************************
+  document
+    .getElementById("croixFermeture")
+    .addEventListener("click", function () {
+      document.getElementById("modal1").style.display = "none";
+    });
+
+  //   Modal1 ajouter photo***********************************************
+  document.getElementById("btnAddPic").addEventListener("click", function () {
+    document.getElementById("modal1").style.display = "none";
+    document.getElementById("modal2").style.display = "flex";
+  });
+
+  // Retour modale1********************************************************
+  document.getElementById("retour2").addEventListener("click", function () {
+    document.getElementById("modal2").style.display = "none";
+    document.getElementById("modal1").style.display = "flex";
+  });
+  //   femeture modale2*****************************************************
+  document
+    .getElementById("croixFermeture2")
+    .addEventListener("click", function () {
+      document.getElementById("modal2").style.display = "none";
+      textInput1.value = "";
+      textInput2.value = "";
+      fileInput.value = "";
+      const preview = document.getElementById("preview");
+      const addPic = document.getElementById("addPic");
+      addPic.appendChild(iconePic);
+      addPic.appendChild(formImg);
+      formImg.appendChild(inputImg);
+      addPic.appendChild(btnAjoutPhoto);
+      addPic.appendChild(infoPic);
+      addPic.removeChild(preview);
+      document.getElementById("modal2").style.display = "none";
+    });
+
+  // bouton ajouter photo**************************************************
+  document
+    .getElementById("btnAjoutPhoto")
+    .addEventListener("click", function () {
+      document.getElementById("photo-input").click();
+    });
+  //  fermeture modal si click exterieur**************************************
+  // const modal = document.querySelector(".modal");*************************
+  const modalGen1 = document.querySelector("#modal1");
+  const modalGen2 = document.querySelector("#modal2");
+  const modal1 = document.querySelector("#modal-box");
+  const modal2 = document.querySelector("#modal-box2");
+
+  modalGen1.addEventListener("click", function (event) {
+    if (
+      event.target !== modal1 &&
+      event.target.closest("#modal-box") === null
+    ) {
+      modalGen1.style.display = "none";
+    }
+  });
+  modalGen2.addEventListener("click", function (event) {
+    if (
+      event.target !== modal2 &&
+      event.target.closest("#modal-box2") === null
+    ) {
+      modalGen2.style.display = "none";
+      textInput1.value = "";
+      textInput2.value = "";
+      fileInput.value = "";
+      const preview = document.getElementById("preview");
+      const addPic = document.getElementById("addPic");
+      addPic.appendChild(iconePic);
+      addPic.appendChild(formImg);
+      formImg.appendChild(inputImg);
+      addPic.appendChild(btnAjoutPhoto);
+      addPic.appendChild(infoPic);
+      addPic.removeChild(preview);
+      document.getElementById("modal2").style.display = "none";
+    }
   });
 }
