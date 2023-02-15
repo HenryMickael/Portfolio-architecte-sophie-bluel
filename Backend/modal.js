@@ -280,7 +280,7 @@ if (bearerToken) {
     })
       .then((res) => {
         if (res.ok) {
-          alert("Votre élément a été supprimé avec succès !");
+          alert("Votre projet a été supprimé avec succès !");
         }
       })
       .catch((error) => console.log(error));
