@@ -349,6 +349,7 @@ if (bearerToken) {
 
   logoutButton.addEventListener("click", () => {
     localStorage.removeItem("bearerToken");
+    localStorage.removeItem("userId");
     window.location.href = "/FrontEnd/";
   });
 
